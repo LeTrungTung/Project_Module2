@@ -1,0 +1,56 @@
+#banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 10px 80px 50px;
+  background-color: #fffd92;
+  margin-bottom: 0;
+}
+#right-banner {
+  text-align: center;
+}
+#img-main {
+  display: block;
+  position: relative;
+  width: 350px;
+  z-index: 100;
+}
+#img-left {
+  position: absolute;
+  width: 250px;
+  object-fit: cover;
+  top: 80%;
+  left: 30px;
+}
+#img-right {
+  position: absolute;
+  width: 180px;
+  object-fit: cover;
+  bottom: -400px;
+  left: 420px;
+}
+#img-topright {
+  position: absolute;
+  width: 180px;
+  object-fit: cover;
+  top: 390px;
+  left: 400px;
+}
+#right-banner h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #c31952;
+}
+
+#right-banner p {
+  font-size: 1.5rem;
+  color: #c31952;
+}
+#right-banner button {
+  background-color: #c31952;
+  color: white;
+  border-radius: 20px;
+  font-weight: 800;
+  border: none;
+  padding: 5px 30px;
+}
