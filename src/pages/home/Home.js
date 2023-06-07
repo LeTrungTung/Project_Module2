@@ -8,6 +8,7 @@ import HeaderOnLogin from "../../components/common/header/HeaderOnLogin";
 import { useDispatch } from "react-redux";
 import { handleCallImageAPI } from "../../redux/reducer/InfoImageSilce";
 import ListImage from "../../components/ListImage/ListImage";
+import MasonryImageList from "../../components/CardImage/CardImage";
 
 const Home = () => {
   const login = JSON.parse(localStorage.getItem("user"));
@@ -27,6 +28,7 @@ const Home = () => {
       {login ? (
         <ListImage />
       ) : (
+        // <MasonryImageList />
         <>
           <Slider />
           <Banner />
