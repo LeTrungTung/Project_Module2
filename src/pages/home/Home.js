@@ -28,7 +28,6 @@ const Home = () => {
       {login ? (
         <ListImage />
       ) : (
-        // <MasonryImageList />
         <>
           <Slider />
           <Banner />

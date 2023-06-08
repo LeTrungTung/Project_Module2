@@ -10,13 +10,13 @@
   border-radius: 50%;
 }
 #header1 {
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* gap: 50px; */
   vertical-align: middle;
-  padding: 10px 5px;
+  padding: 20px 5px;
   text-align: center;
+  position: fixed;
+  background-color: white;
+  top: 0;
+  z-index: 999;
 }
 #ip-search {
   width: 100%;
@@ -25,16 +25,14 @@
   border: none;
   border-radius: 40px;
   padding: 15px 45px;
+  outline: none;
+  border: 1px solid #ccc;
 }
 #icon-search {
   position: absolute;
   z-index: 100;
-  /* top: 110px;
-  left: 360px; */
   font-size: 22px;
-
-  margin-top: 1.5%;
-  /* transform: translateY(-50%); */
+  cursor: pointer;
   margin-left: 1.2%;
 }
 #left-header1 {
@@ -43,16 +41,26 @@
   justify-content: space-around;
   align-items: center;
 }
+
 #bell,
 #message,
 #avatar,
 #minilogo {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: grey;
   padding: 10px;
   box-sizing: content-box;
+  transition: 0.2s;
 }
+
+#minilogo {
+  width: 50px;
+  height: 50px;
+  color: grey;
+  box-sizing: border-box;
+}
+
 #avatar {
   border-radius: 50%;
 }
@@ -67,10 +75,12 @@
   border-radius: 50%;
 }
 #btn-mainpage {
-  padding: 15px;
+  padding: 12px;
   background-color: black;
   color: white;
   border-radius: 40px;
+  font-weight: 600;
+  transition: 0.2s;
 }
 #right-header1 {
   display: flex;

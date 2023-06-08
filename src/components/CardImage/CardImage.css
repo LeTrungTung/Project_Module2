@@ -1,6 +1,8 @@
+#wrap-cards {
+  margin-top: 100px;
+}
 #id-itembar {
   display: flex;
-  /* opacity: 0.5; */
 }
 .cl-image img {
   border-radius: 20px;

@@ -23,7 +23,12 @@ const HeaderOnLogin = () => {
           </button>
         </Col>
 
-        <Col lg="7" md="4" xs="1">
+        <Col
+          style={{ display: "flex", alignItems: "center" }}
+          lg="7"
+          md="4"
+          xs="1"
+        >
           <BiSearchAlt2 id="icon-search" />
           <input type="search" placeholder="Search" id="ip-search" />
         </Col>
