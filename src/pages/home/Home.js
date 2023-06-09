@@ -15,12 +15,10 @@ const Home = () => {
 
   // gọi API và lưu vào redux
   const dispatch = useDispatch();
-  useEffect(() => {
-    const getAllImage = async () => {
-      await dispatch(handleCallImageAPI()).unwrap();
-    };
-    getAllImage();
-  }, []);
+  const getAllImage = async () => {
+    await dispatch(handleCallImageAPI()).unwrap();
+  };
+  getAllImage();
 
   return (
     <div>

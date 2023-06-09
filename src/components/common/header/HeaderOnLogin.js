@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
 import "./HeaderOnLogin.css";
+import InfoImageAPI from "../../../api/InfoImage";
+import { handleAddImageAPI } from "../../../redux/reducer/InfoImageSilce";
+import ModalForm from "./ModalForrm";
+import { useDispatch } from "react-redux";
 
 const HeaderOnLogin = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAddImage = () => {
+    setShowModal(true);
+    // const newImage = {
+    //   title: 1,
+    //   description: 2,
+    //   urlImage: 3,
+    //   author: 4,
+    // };
+  };
+
   return (
     <Container fluid id="header1">
+      {showModal && (
+        <ModalForm show={showModal} setShow={setShowModal} />
+      )}
       <Row>
         <Col lg="3" md="4" xs="6" id="left-header1">
           <img
@@ -18,8 +37,9 @@ const HeaderOnLogin = () => {
             id="minilogo"
           />
           <button id="btn-mainpage">Trang chủ</button>
-          <button id="btn-create">
-            Tạo <IoIosArrowDown id="arrow-create" />
+          <button id="btn-create" onClick={handleAddImage}>
+            Thêm ảnh
+            <IoIosArrowDown id="arrow-create" />
           </button>
         </Col>
 

@@ -6,6 +6,10 @@ class InfoImageAPI {
     const url = "/infoimage";
     return axiosClient.get(url);
   }
+  static addImage(params) {
+    const url = "/infoimage";
+    return axiosClient.post(url, params);
+  }
 }
 
 export default InfoImageAPI;

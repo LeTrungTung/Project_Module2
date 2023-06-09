@@ -22,7 +22,7 @@ const DetailImage = () => {
   console.log("cm,", commentList);
 
   const imageViewDetail = imageList.find(
-    (image) => image.id === Number(paramsId.id)
+    (image) => image.id === numberId
   );
   console.log(33, imageViewDetail);
   const [comment, setComment] = useState("");
@@ -76,33 +76,41 @@ const DetailImage = () => {
   };
 
   // handle save
-  const [isSaved, setIsSaved] = useState(false); //để theo dõi nút Lưu
+
   const documentList = useSelector((state) => state.documents);
   console.log("listDC", documentList);
 
+  // kiểm tra ảnh đang xem đã được lưu chưa
+  let isSaved = false;
+  const dataSavedImage = documentList.filter(
+    (document) => document.idUser === userLogin.id
+  );
+  console.log(66, dataSavedImage);
+  if (dataSavedImage.length > 0) {
+    const checkdata = dataSavedImage.find(
+      (item) => +item.idImage === +numberId
+    );
+    console.log("check", checkdata);
+    isSaved =
+      checkdata !== undefined && checkdata !== null ? true : false;
+  }
+  console.log("IsSaved", isSaved);
+
   const handleSaveImage = async () => {
-    setIsSaved(true);
     const newDocumment = {
       idUser: userLogin.id,
       idImage: numberId,
       timecreate: new Date().toLocaleDateString("en-GB"),
     };
 
-    // DocumentAPI.postDocument(newDocumment)
-    //   .then((response) => {
-    //     console.log("Documment sent successfully:", response.data);
-    //     // update lại dữ liệu từ DB về Redux
-    //     // dispatch(handleCallDocumentAPI()).unwrap();
-    //   })
-    //   .catch((error) => {
-    //     // Xử lý khi gửi bình luận gặp lỗi
-    //     console.error("Error sending comment:", error);
-    //   });
-    const data = await dispatch(
-      handleCallDocumentAPI(newDocumment)
-    ).unwrap();
-    if (data) {
-      console.log("tao thanh cong");
+    // nếu ảnh chưa lưu thì add ảnh vào API, ngược lại thì không
+    if (!isSaved) {
+      const data = await dispatch(
+        handleCallDocumentAPI(newDocumment)
+      ).unwrap();
+      if (data) {
+        console.log("tao thanh cong");
+      }
     }
   };
 

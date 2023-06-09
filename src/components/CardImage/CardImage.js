@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 const CardImage = (props) => {
   const navigate = useNavigate();
   const { dataImage } = props;
+  console.log(dataImage);
   const [hoveredItem, setHoveredItem] = React.useState(null);
 
   const handleMouseEnter = (itemId) => {
@@ -32,45 +33,46 @@ const CardImage = (props) => {
     <Container id="wrap-cards">
       <Box sx={{ width: 1200, height: 450 }}>
         <ImageList variant="masonry" cols={5} gap={10}>
-          {dataImage.map((item) => (
-            <ImageListItem
-              key={item.id}
-              className="cl-image"
-              onMouseEnter={() => handleMouseEnter(item.id)}
-              onMouseLeave={handleMouseLeave}
-              sx={{
-                filter:
-                  hoveredItem === item.id
-                    ? "brightness(80%)"
-                    : "none",
-                transition: "filter 0.3s ease",
-                cursor: "zoom-in",
-              }}
-            >
-              <img
-                src={`${item.urlImage}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.urlImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-                id={item.id}
-                onClick={() => handleViewImage(item.id)}
-              />
-              {hoveredItem === item.id && (
-                <ImageListItemBar
-                  title={item.title}
-                  subtitle={item.author}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: "white" }}
-                      aria-label={`info about ${item.title}`}
-                    >
-                      <PendingIcon sx={{ fontSize: 30 }} />
-                    </IconButton>
-                  }
+          {dataImage &&
+            dataImage?.map((item) => (
+              <ImageListItem
+                key={item.id}
+                className="cl-image"
+                onMouseEnter={() => handleMouseEnter(item.id)}
+                onMouseLeave={handleMouseLeave}
+                sx={{
+                  filter:
+                    hoveredItem === item.id
+                      ? "brightness(80%)"
+                      : "none",
+                  transition: "filter 0.3s ease",
+                  cursor: "zoom-in",
+                }}
+              >
+                <img
+                  src={`${item.urlImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${item.urlImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt={item.title}
+                  loading="lazy"
+                  id={item.id}
+                  onClick={() => handleViewImage(item.id)}
                 />
-              )}
-            </ImageListItem>
-          ))}
+                {hoveredItem === item.id && (
+                  <ImageListItemBar
+                    title={item.title}
+                    subtitle={item.author}
+                    actionIcon={
+                      <IconButton
+                        sx={{ color: "white" }}
+                        aria-label={`info about ${item.title}`}
+                      >
+                        <PendingIcon sx={{ fontSize: 30 }} />
+                      </IconButton>
+                    }
+                  />
+                )}
+              </ImageListItem>
+            ))}
         </ImageList>
       </Box>
     </Container>
