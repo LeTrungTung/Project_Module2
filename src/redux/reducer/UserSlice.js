@@ -6,8 +6,22 @@ export const register = createAsyncThunk(
   async (payload) => {
     const response = await UserAPI.register(payload);
     console.log("payload", response);
-    //luu User
-    // localStorage.setItem("user", JSON.stringify(response.user));
+
+    // luu UserDB lên localstorage
+    const userDB = JSON.parse(localStorage.getItem("users")) ?? [];
+    let isDulicate = false;
+    // B3.2 Lọc qua từng phần tử để tìm email trùng nếu có
+    userDB.forEach((user) => {
+      if (user.email === response.user) {
+        isDulicate = true;
+      }
+    });
+    // B3.3 Kiểm tra trùng dữ liệu
+    if (!isDulicate) {
+      userDB.push(response.user);
+      localStorage.setItem("users", JSON.stringify(userDB));
+    }
+    // localStorage.setItem("users", JSON.stringify(response.user));
     // //luu accessTOken
     // localStorage.setItem(
     //   "access_token",

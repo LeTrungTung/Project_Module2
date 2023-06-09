@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import CommentAPI from "../../api/Comment";
 import { handleCallCommentAPI } from "../../redux/reducer/CommentSlice";
+import { ClassNames } from "@emotion/react";
+import DocumentAPI from "../../api/Document";
+import { handleCallDocumentAPI } from "../../redux/reducer/DocumentSlice";
 const DetailImage = () => {
   const paramsId = useParams();
   const numberId = Number(paramsId.id);
@@ -61,6 +64,47 @@ const DetailImage = () => {
     (comment) => comment.idImage === numberId
   );
   // console.log("count", count.length);
+  const handleHeartClick = async (id) => {
+    const commentHeart = commentList.find(
+      (comment) => comment.id === id
+    );
+    console.log("comment", commentHeart);
+    await CommentAPI.updateLike({
+      ...commentHeart,
+      heart: commentHeart.heart + 1,
+    }).then(() => dispatch(handleCallCommentAPI()).unwrap());
+  };
+
+  // handle save
+  const [isSaved, setIsSaved] = useState(false); //để theo dõi nút Lưu
+  const documentList = useSelector((state) => state.documents);
+  console.log("listDC", documentList);
+
+  const handleSaveImage = async () => {
+    setIsSaved(true);
+    const newDocumment = {
+      idUser: userLogin.id,
+      idImage: numberId,
+      timecreate: new Date().toLocaleDateString("en-GB"),
+    };
+
+    // DocumentAPI.postDocument(newDocumment)
+    //   .then((response) => {
+    //     console.log("Documment sent successfully:", response.data);
+    //     // update lại dữ liệu từ DB về Redux
+    //     // dispatch(handleCallDocumentAPI()).unwrap();
+    //   })
+    //   .catch((error) => {
+    //     // Xử lý khi gửi bình luận gặp lỗi
+    //     console.error("Error sending comment:", error);
+    //   });
+    const data = await dispatch(
+      handleCallDocumentAPI(newDocumment)
+    ).unwrap();
+    if (data) {
+      console.log("tao thanh cong");
+    }
+  };
 
   return (
     <Container id="wrap-detail">
@@ -76,7 +120,13 @@ const DetailImage = () => {
                 <IoIosArrowDown />
               </div>
               <div>
-                <button id="id-save">Lưu</button>
+                <button
+                  id="id-save"
+                  onClick={() => handleSaveImage(numberId)}
+                  className={isSaved ? "saved" : ""}
+                >
+                  {isSaved ? "Đã lưu" : "Lưu"}
+                </button>
               </div>
             </div>
             <div>
@@ -128,7 +178,11 @@ const DetailImage = () => {
                       <div style={{ display: "flex", gap: "30px" }}>
                         <span>{item.timecreate}</span>
                         <span>
-                          <AiOutlineHeart id="id-heart" />
+                          <AiOutlineHeart
+                            id="id-heart"
+                            onClick={() => handleHeartClick(item.id)}
+                            className={item.heart > 0 ? "active" : ""}
+                          />
                           {item.heart > 0 ? item.heart : ""}
                         </span>
                         <span>

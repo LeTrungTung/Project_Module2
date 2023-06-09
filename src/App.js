@@ -12,6 +12,8 @@ import { handleCallImageAPI } from "./redux/reducer/InfoImageSilce";
 import Detail from "./pages/detail/Detail";
 import CardImage from "./components/CardImage/CardImage";
 import { handleCallCommentAPI } from "./redux/reducer/CommentSlice";
+import InfoDocument from "./pages/document/InfoDocument";
+import { handleGetDocumentAPI } from "./redux/reducer/DocumentSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,7 +21,12 @@ function App() {
     const handleGetComment = async () => {
       await dispatch(handleCallCommentAPI()).unwrap();
     };
+    // gọi trường dữ liệu Document từ API về
+    const handleGetDocumment = async () => {
+      await dispatch(handleGetDocumentAPI()).unwrap();
+    };
     handleGetComment();
+    handleGetDocumment();
   }, []);
 
   // const { id } = useParams(); //lấy tham số id từ URL
@@ -34,6 +41,7 @@ function App() {
         </Route>
         <Route path="/uploadImage" element={<UploadImage />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/document" element={<InfoDocument />} />
       </Routes>
     </div>
   );

@@ -115,3 +115,10 @@
   margin-left: -70px;
   margin-top: -18px;
 }
+.active {
+  background-color: red !important;
+}
+.saved {
+  color: white !important;
+  background-color: black !important;
+}

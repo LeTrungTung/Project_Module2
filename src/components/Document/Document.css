@@ -1,0 +1,27 @@
+#wrap-document {
+  text-align: center;
+  display: flex;
+  /* gap: 10px; */
+  flex-direction: column;
+  margin-top: 100px;
+}
+#avatar-dc {
+  width: 100px;
+}
+#email-user {
+  font-family: "Courier New", Courier, monospace;
+}
+#saved {
+  font-weight: 500;
+  padding-top: 15px;
+  text-decoration-line: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+}
+#date-create {
+  font-weight: 500;
+}
+#name-user {
+  padding: 8px;
+}
