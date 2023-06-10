@@ -14,7 +14,7 @@ export const handleCallCommentAPI = createAsyncThunk(
 
 const CommentSlice = createSlice({
   name: "comments",
-  initialState: localStorage.getItem("comments") || [],
+  initialState: [],
   extraReducers: {
     [handleCallCommentAPI.fulfilled]: (state, action) => {
       return (state = action.payload);

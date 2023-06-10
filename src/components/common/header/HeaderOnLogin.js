@@ -12,16 +12,27 @@ import { useDispatch } from "react-redux";
 
 const HeaderOnLogin = () => {
   const [showModal, setShowModal] = useState(false);
+  const userLogin = JSON.parse(localStorage.getItem("user")) || [];
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   const handleAddImage = () => {
     setShowModal(true);
-    // const newImage = {
-    //   title: 1,
-    //   description: 2,
-    //   urlImage: 3,
-    //   author: 4,
-    // };
   };
+
+  // Xử lý khi Click vào nuta xổ xuống bên cạnh Avata user
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const handleArrowClick = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+  // const handleMenuHover = (e) => {
+  //   e.target.classList.toggle("hover");
+  // };
 
   return (
     <Container fluid id="header1">
@@ -61,7 +72,18 @@ const HeaderOnLogin = () => {
             className="cl-hover"
             id="avatar"
           />
-          <IoIosArrowDown id="arrow-avatar" />
+          <IoIosArrowDown
+            id="arrow-avatar"
+            onClick={handleArrowClick}
+            className={isMenuOpen ? "open" : ""}
+          />
+          {isMenuOpen && (
+            <div className="menu-dropdown">
+              <span className="logout" onClick={handleLogout}>
+                Đăng xuất
+              </span>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

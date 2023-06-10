@@ -16,7 +16,7 @@
   position: fixed;
   background-color: white;
   top: 0;
-  z-index: 999;
+  z-index: 100;
 }
 #ip-search {
   width: 100%;
@@ -92,4 +92,37 @@
   border: none;
   background-color: white;
   font-weight: 600;
+}
+
+/* csss menu tại nút mũi tên bên phải */
+.menu-dropdown {
+  display: block;
+  position: absolute;
+  top: 70px;
+  right: 5px;
+  background-color: #ebdbdb !important;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  color: black;
+}
+
+.open .menu-dropdown {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.menu-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.menu-item.hover {
+  background-color: lightgray;
+}
+.logout {
+  font-weight: 500;
+  padding: 10px 15px;
+  cursor: pointer;
 }

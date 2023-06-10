@@ -21,17 +21,33 @@ export const handleAddImageAPI = createAsyncThunk(
   }
 );
 
+// const InfoImageSlice = createSlice({
+//   name: "infoimage",
+//   initialState: localStorage.getItem("images") || [],
+//   extraReducers: {
+//     [handleCallImageAPI.fulfilled]: (state, action) => {
+//       return (state = action.payload);
+//     },
+//     [handleAddImageAPI.fulfilled]: (state, action) => {
+//       return (state = action.payload);
+//     },
+//   },
+// });
+
+// export const { actions, reducer } = InfoImageSlice;
+// export default reducer;
+
 const InfoImageSlice = createSlice({
   name: "infoimage",
-  initialState: localStorage.getItem("images") || [],
-  extraReducers: {
-    [handleCallImageAPI.fulfilled]: (state, action) => {
-      return (state = action.payload);
-    },
-    [handleAddImageAPI.fulfilled]: (state, action) => {
-      state.push(action.payload);
-      return state;
-    },
+  initialState: [],
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(handleCallImageAPI.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(handleAddImageAPI.fulfilled, (state, action) => {
+      return action.payload;
+    });
   },
 });
 

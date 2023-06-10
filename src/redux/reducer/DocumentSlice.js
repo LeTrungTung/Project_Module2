@@ -24,7 +24,7 @@ export const handleGetDocumentAPI = createAsyncThunk(
 
 const DocumentSlice = createSlice({
   name: "documents",
-  initialState: localStorage.getItem("documents") || [],
+  initialState: [],
   extraReducers: {
     [handleCallDocumentAPI.fulfilled]: (state, action) => {
       return (state = [...state, action.payload]);

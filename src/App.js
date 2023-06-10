@@ -14,6 +14,7 @@ import CardImage from "./components/CardImage/CardImage";
 import { handleCallCommentAPI } from "./redux/reducer/CommentSlice";
 import InfoDocument from "./pages/document/InfoDocument";
 import { handleGetDocumentAPI } from "./redux/reducer/DocumentSlice";
+import Vd from "./components/common/header/vd";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,12 @@ function App() {
     const handleGetDocumment = async () => {
       await dispatch(handleGetDocumentAPI()).unwrap();
     };
+
+    const getAllImage = async () => {
+      await dispatch(handleCallImageAPI()).unwrap();
+    };
+    getAllImage();
+
     handleGetComment();
     handleGetDocumment();
   }, []);
@@ -42,6 +49,7 @@ function App() {
         <Route path="/uploadImage" element={<UploadImage />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/document" element={<InfoDocument />} />
+        <Route path="/vd" element={<Vd />} />
       </Routes>
     </div>
   );

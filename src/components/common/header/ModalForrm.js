@@ -26,6 +26,8 @@ function ModalForm(props) {
   const handleClose = () => props.setShow(false);
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    //    Tạm khoá đi chức năng này !!!!!!!!!!!!!!!!!!!!!!!!!!
     InfoImageAPI.addImage(dataForm)
       .then((response) => {
         console.log("Image sent successfully:", response.data);
@@ -47,7 +49,9 @@ function ModalForm(props) {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
 
+    // Tạm khoá !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if (!file) return;
+
     const storages = storage;
     const imgRefs = ref(storages, `images/${file.name}`);
     uploadBytes(imgRefs, file).then((snapshot) => {

@@ -13,6 +13,7 @@ import { handleCallCommentAPI } from "../../redux/reducer/CommentSlice";
 import { ClassNames } from "@emotion/react";
 import DocumentAPI from "../../api/Document";
 import { handleCallDocumentAPI } from "../../redux/reducer/DocumentSlice";
+
 const DetailImage = () => {
   const paramsId = useParams();
   const numberId = Number(paramsId.id);
