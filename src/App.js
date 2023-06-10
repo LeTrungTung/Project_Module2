@@ -15,6 +15,8 @@ import { handleCallCommentAPI } from "./redux/reducer/CommentSlice";
 import InfoDocument from "./pages/document/InfoDocument";
 import { handleGetDocumentAPI } from "./redux/reducer/DocumentSlice";
 import Vd from "./components/common/header/vd";
+import Admin from "./components/admin/Admin";
+import { handleGetUsersAPI } from "./redux/reducer/ListUserSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +32,10 @@ function App() {
     const getAllImage = async () => {
       await dispatch(handleCallImageAPI()).unwrap();
     };
+    const getListUsser = async () => {
+      await dispatch(handleGetUsersAPI()).unwrap();
+    };
+    getListUsser();
     getAllImage();
 
     handleGetComment();
@@ -49,7 +55,8 @@ function App() {
         <Route path="/uploadImage" element={<UploadImage />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/document" element={<InfoDocument />} />
-        <Route path="/vd" element={<Vd />} />
+        {/* <Route path="/vd" element={<Vd />} /> */}
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );

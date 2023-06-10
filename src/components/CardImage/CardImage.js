@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const CardImage = (props) => {
   const navigate = useNavigate();
   const { dataImage } = props;
-  console.log(33, dataImage);
+  // console.log(33, dataImage);
   const [hoveredItem, setHoveredItem] = React.useState(null);
 
   const handleMouseEnter = (itemId) => {

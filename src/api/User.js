@@ -11,4 +11,9 @@ export class UserAPI {
     const url = "/login";
     return axiosClient.post(url, param);
   }
+
+  static getUsers() {
+    const url = "/users";
+    return axiosClient.get(url);
+  }
 }

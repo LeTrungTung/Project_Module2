@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsFillCaretRightSquareFill } from "react-icons/bs";
 import "./DetailImage.css";
 import { useLocation, useParams } from "react-router-dom";
@@ -177,21 +177,55 @@ const DetailImage = () => {
                       />
                     </div>
                     <div>
-                      <div style={{ display: "flex", gap: "15px" }}>
-                        <u style={{ fontWeight: "500" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "15px",
+                          alignItems: "center",
+                        }}
+                      >
+                        <u
+                          style={{
+                            fontWeight: "600",
+                            textDecoration: "none",
+                          }}
+                        >
                           {" "}
                           {item.person}
                         </u>
                         <span>{item.note}</span>
                       </div>
-                      <div style={{ display: "flex", gap: "30px" }}>
-                        <span>{item.timecreate}</span>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "30px",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span
+                          style={{ fontSize: 14, opacity: "0.7" }}
+                        >
+                          {item.timecreate}
+                        </span>
                         <span>
-                          <AiOutlineHeart
-                            id="id-heart"
-                            onClick={() => handleHeartClick(item.id)}
-                            className={item.heart > 0 ? "active" : ""}
-                          />
+                          {item.heart > 0 ? (
+                            <AiFillHeart
+                              id="id-heart"
+                              onClick={() =>
+                                handleHeartClick(item.id)
+                              }
+                              className={
+                                item.heart > 0 ? "active" : ""
+                              }
+                            />
+                          ) : (
+                            <AiOutlineHeart
+                              id="id-heart"
+                              onClick={() =>
+                                handleHeartClick(item.id)
+                              }
+                            />
+                          )}
                           {item.heart > 0 ? item.heart : ""}
                         </span>
                         <span>
