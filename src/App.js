@@ -8,7 +8,10 @@ import Register from "./components/Register/Register";
 import UploadImage from "./components/uploadImage/UploadImage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { handleCallImageAPI } from "./redux/reducer/InfoImageSilce";
+import {
+  handleCallImageAPI,
+  handleEditImageAPI,
+} from "./redux/reducer/InfoImageSilce";
 import Detail from "./pages/detail/Detail";
 import CardImage from "./components/CardImage/CardImage";
 import { handleCallCommentAPI } from "./redux/reducer/CommentSlice";
@@ -17,6 +20,8 @@ import { handleGetDocumentAPI } from "./redux/reducer/DocumentSlice";
 import Vd from "./components/common/header/vd";
 import Admin from "./components/admin/Admin";
 import { handleGetUsersAPI } from "./redux/reducer/ListUserSlice";
+import ImageManage from "./components/admin/ImageManage";
+import CrudDetail from "./components/admin/CrudDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +40,9 @@ function App() {
     const getListUsser = async () => {
       await dispatch(handleGetUsersAPI()).unwrap();
     };
+
     getListUsser();
     getAllImage();
-
     handleGetComment();
     handleGetDocumment();
   }, []);
@@ -57,6 +62,8 @@ function App() {
         <Route path="/document" element={<InfoDocument />} />
         {/* <Route path="/vd" element={<Vd />} /> */}
         <Route path="/admin" element={<Admin />} />
+        <Route path="/images" element={<ImageManage />} />
+        <Route path="/cruddetail/:id" element={<CrudDetail />} />
       </Routes>
     </div>
   );

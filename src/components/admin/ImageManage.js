@@ -1,11 +1,13 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
-import "./Admin.css";
+import "./ImageManage.css";
 import UserManage from "./UserManage";
 import { Link, useLocation } from "react-router-dom";
+import CRUDImage from "./CRUDImage";
+import "./ImageManage.css";
 
-const Admin = () => {
+const ImageManage = () => {
   const location = useLocation();
   return (
     <div id="wrap-admin">
@@ -16,16 +18,16 @@ const Admin = () => {
         <div id="sec-center">
           <ul>
             <Link to="/admin">
-              <li
-                className={
-                  location.pathname == "/admin" ? "active" : ""
-                }
-              >
-                Quản lý người dùng
-              </li>
+              <li>Quản lý người dùng</li>
             </Link>
             <Link to="/images">
-              <li>Quản lý hình ảnh</li>
+              <li
+                className={
+                  location.pathname == "/images" ? "active" : ""
+                }
+              >
+                Quản lý hình ảnh
+              </li>
             </Link>
           </ul>
         </div>
@@ -37,10 +39,11 @@ const Admin = () => {
         </div>
       </div>
       <div className="content-body">
-        <UserManage />
+        <h1 id="title-crud-1">Quản lý hình ảnh</h1>
+        <CRUDImage />
       </div>
     </div>
   );
 };
 
-export default Admin;
+export default ImageManage;
