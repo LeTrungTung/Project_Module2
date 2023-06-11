@@ -6,12 +6,15 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { Container } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import PendingIcon from "@mui/icons-material/Pending";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./CRUDImage.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function CRUDImage() {
-  const dataImage = useSelector((state) => state.infoimage);
+  const dataImage = useSelector((state) => state.infoimage) || [];
   console.log("dữ liệu ảnh", dataImage);
 
   const navigate = useNavigate();
@@ -47,7 +50,7 @@ function CRUDImage() {
       <Box sx={{ width: 1200, height: 450 }}>
         <ImageList variant="masonry" cols={5} gap={10}>
           {dataImage &&
-            dataImage?.map((item) => (
+            dataImage.map((item) => (
               <ImageListItem
                 key={item.id}
                 className="cl-image"

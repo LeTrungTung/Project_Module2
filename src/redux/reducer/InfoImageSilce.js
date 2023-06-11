@@ -31,6 +31,16 @@ export const handleEditImageAPI = createAsyncThunk(
   }
 );
 
+export const handleDeleteImageAPI = createAsyncThunk(
+  "delete/handleDeleteImageAPI",
+  async (action) => {
+    //thay vì call ở component thì mình call trực tiêps tại redux
+    const response = await InfoImageAPI.deleteImage(action);
+    // trả về 1 payload
+    return response;
+  }
+);
+
 // const InfoImageSlice = createSlice({
 //   name: "infoimage",
 //   initialState: localStorage.getItem("images") || [],

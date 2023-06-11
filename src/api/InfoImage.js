@@ -14,6 +14,10 @@ class InfoImageAPI {
     const url = `/infoimage/${params.id}`;
     return axiosClient.patch(url, params);
   }
+  static deleteImage(id) {
+    const url = `/infoimage/${id}`;
+    return axiosClient.delete(url);
+  }
 }
 
 export default InfoImageAPI;

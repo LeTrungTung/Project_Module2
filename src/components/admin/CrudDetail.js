@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsFillCaretRightSquareFill } from "react-icons/bs";
-import { useLocation, useParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import CommentAPI from "../../api/Comment";
@@ -13,13 +17,25 @@ import { ClassNames } from "@emotion/react";
 import DocumentAPI from "../../api/Document";
 import { handleCallDocumentAPI } from "../../redux/reducer/DocumentSlice";
 import "./CrudDetail.css";
-import { handleEditImageAPI } from "../../redux/reducer/InfoImageSilce";
+import {
+  handleCallImageAPI,
+  handleDeleteImageAPI,
+  handleEditImageAPI,
+} from "../../redux/reducer/InfoImageSilce";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CrudDetail = () => {
+  const navigate = useNavigate();
   const paramsId = useParams();
   const numberId = Number(paramsId.id);
   const [imageViewDetail, setImageViewDetail] = useState();
-  const imageList = useSelector((state) => state.infoimage);
+  // set trạng thái của Buton "Lưu thay đổi" active/inactive
+  const [isEditActive, setIsEditActive] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // Trạng thái hiển thị modal xóa
+  const imageList = useSelector((state) => state.infoimage) || [];
+  console.log("imgList", imageList);
+
   //  Gọi dữ liệu comment từ redux về
   useEffect(() => {
     const imageViewDetail1 = imageList.find(
@@ -47,6 +63,7 @@ const CrudDetail = () => {
       author: imageViewDetail?.author,
       description: imageViewDetail?.description,
     });
+    setIsEditActive(true);
   };
 
   const handleFormChange = (e) => {
@@ -60,7 +77,23 @@ const CrudDetail = () => {
     e.preventDefault();
     // Handle saving changes logic here
     console.log("formedit", formEdit);
-    await dispatch(handleEditImageAPI(formEdit)).unwrap();
+    // đè dữ liệu của object mới vào object cũ tại id tương ứng
+    const updateData = { ...imageViewDetail, ...formEdit };
+    console.log("upData", updateData);
+
+    await dispatch(handleEditImageAPI(updateData)).unwrap();
+    toast.success("Hiệu chỉnh hoàn thành!", {
+      onClose: () => {
+        setTimeout(() => {
+          navigate("/images");
+        }, 2000); // Chờ 2 giây trước khi chuyển hướng
+      },
+    });
+
+    const getAllImage = async () => {
+      await dispatch(handleCallImageAPI()).unwrap();
+    };
+    getAllImage();
 
     // Reset formEdit to empty values
     setFormEdit({
@@ -68,9 +101,27 @@ const CrudDetail = () => {
       author: "",
       description: "",
     });
+    setIsEditActive(false);
   };
 
-  //thu la lay data của thằng /infoimage sau tìm kiếm cái thằng id của thằng a mới click sau đó ... giữ file đấy cập lại các cặp key và value ví dụ { ...objec, formEdit}
+  const handleDeleteImage = async () => {
+    await dispatch(handleDeleteImageAPI(numberId)).unwrap();
+    setShowDeleteModal(false);
+    const getAllImage = async () => {
+      await dispatch(handleCallImageAPI()).unwrap();
+    };
+    getAllImage();
+
+    toast.success("Xóa ảnh thành công!", {
+      onClose: () => {
+        setTimeout(() => {
+          navigate("/images");
+        }, 2000); // Chờ 2 giây trước khi chuyển hướng
+      },
+    });
+  };
+
+  // lay data của /infoimage sau tìm kiếm id của object mới click sau đó ... giữ file đấy cập lại các cặp key và value ví dụ { ...objec, formEdit}
   return (
     <Container id="wrap-detail">
       <div id="left-area">
@@ -85,7 +136,12 @@ const CrudDetail = () => {
               </Button>
             </div>
             <div>
-              <Button variant="danger">Xóa ảnh</Button>
+              <Button
+                variant="danger"
+                onClick={() => setShowDeleteModal(true)}
+              >
+                Xóa ảnh
+              </Button>
             </div>
           </div>
           <h4>Tiêu đề ảnh: {imageViewDetail?.title}</h4>
@@ -141,15 +197,41 @@ const CrudDetail = () => {
                   onChange={handleFormChange}
                 />
               </Form.Group>
-              <Button
-                style={{ textAlign: "center !important" }}
-                onClick={handleSaveChanges}
-              >
-                Lưu thay đổi
-              </Button>
+              {isEditActive == true ? (
+                <Button
+                  style={{ textAlign: "center !important" }}
+                  onClick={handleSaveChanges}
+                >
+                  Lưu thay đổi
+                </Button>
+              ) : (
+                ""
+              )}
             </Form>
           </div>
         </div>
+
+        <Modal
+          show={showDeleteModal}
+          onHide={() => setShowDeleteModal(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Xác nhận xóa ảnh</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Bạn có chắc chắn muốn xóa ảnh này?</Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setShowDeleteModal(false)}
+            >
+              Hủy
+            </Button>
+            <Button variant="danger" onClick={handleDeleteImage}>
+              Xóa
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <ToastContainer />
       </div>
     </Container>
   );
