@@ -1,6 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Route, Routes, useParams } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./components/Login/Login";
 import Auth from "./pages/auth/Auth";
@@ -25,6 +31,22 @@ import CrudDetail from "./components/admin/CrudDetail";
 
 function App() {
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userLogin = JSON.parse(localStorage.getItem("user")) || [];
+  // check email đăng nhập có phải là admin hay không, nếu ko ko cho vào trang admin
+  useEffect(() => {
+    if (
+      (location.pathname === "/admin" ||
+        location.pathname === "/images" ||
+        location.pathname.includes("/cruddetail/")) &&
+      userLogin.email !== "tung@gmail.com"
+    ) {
+      navigate("/");
+    }
+  }, [location.pathname, userLogin]);
+
   useEffect(() => {
     const handleGetComment = async () => {
       await dispatch(handleCallCommentAPI()).unwrap();

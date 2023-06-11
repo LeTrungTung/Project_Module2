@@ -3,16 +3,17 @@ import { Container } from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 import "./ImageManage.css";
 import UserManage from "./UserManage";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CRUDImage from "./CRUDImage";
 import "./ImageManage.css";
 
 const ImageManage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   return (
     <div id="wrap-admin">
       <div id="header-admin">
-        <div id="header-admin-left">
+        <div id="header-admin-left" onClick={() => navigate("/")}>
           <img src="https://seeklogo.com/images/P/pinterest-logo-B783288EDA-seeklogo.com.png" />
         </div>
         <div id="sec-center">

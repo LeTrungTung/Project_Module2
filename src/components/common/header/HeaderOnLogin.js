@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 import { BiSearchAlt2 } from "react-icons/bi";
@@ -6,13 +6,20 @@ import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
 import "./HeaderOnLogin.css";
 import InfoImageAPI from "../../../api/InfoImage";
-import { handleAddImageAPI } from "../../../redux/reducer/InfoImageSilce";
+import {
+  handleAddImageAPI,
+  handleCallImageAPI,
+} from "../../../redux/reducer/InfoImageSilce";
 import ModalForm from "./ModalForrm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HeaderOnLogin = () => {
   const [showModal, setShowModal] = useState(false);
   const userLogin = JSON.parse(localStorage.getItem("user")) || [];
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const imageState = useSelector((state) => state.infoImage);
 
   // Logout
   const handleLogout = () => {
@@ -22,7 +29,10 @@ const HeaderOnLogin = () => {
   };
 
   const handleAddImage = () => {
+    // dispatch(handleAddImageAPI());
     setShowModal(true);
+    // load lại trang sau khi Edit
+    dispatch(handleCallImageAPI());
   };
 
   // Xử lý khi Click vào nuta xổ xuống bên cạnh Avata user
@@ -33,6 +43,10 @@ const HeaderOnLogin = () => {
   // const handleMenuHover = (e) => {
   //   e.target.classList.toggle("hover");
   // };
+
+  // useEffect(() => {
+  //   dispatch(handleCallImageAPI());
+  // }, [dispatch]);
 
   return (
     <Container fluid id="header1">
@@ -47,7 +61,9 @@ const HeaderOnLogin = () => {
             className="cl-hover"
             id="minilogo"
           />
-          <button id="btn-mainpage">Trang chủ</button>
+          <button id="btn-mainpage" onClick={() => navigate("/")}>
+            Trang chủ
+          </button>
           <button id="btn-create" onClick={handleAddImage}>
             Thêm ảnh
             <IoIosArrowDown id="arrow-create" />
