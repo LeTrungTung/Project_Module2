@@ -27,7 +27,6 @@ function ModalForm(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    //    Tạm khoá đi chức năng này !!!!!!!!!!!!!!!!!!!!!!!!!!
     InfoImageAPI.addImage(dataForm)
       .then((response) => {
         console.log("Image sent successfully:", response.data);

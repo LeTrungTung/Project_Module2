@@ -11,6 +11,7 @@ import { useHistory, useNavigate } from "react-router-dom";
 import "./CardImage.css";
 import { DisabledByDefault } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { Row } from "react-bootstrap";
 
 // import React from "react";
 

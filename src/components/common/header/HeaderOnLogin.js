@@ -41,34 +41,19 @@ const HeaderOnLogin = () => {
   const handleArrowClick = () => {
     setMenuOpen(!isMenuOpen);
   };
-  // const handleMenuHover = (e) => {
-  //   e.target.classList.toggle("hover");
-  // };
-
-  // useEffect(() => {
-  //   dispatch(handleCallImageAPI());
-  // }, [dispatch]);
-
-  // const imageList = useSelector((state) => {
-  //   const { infoimage } = state;
-  //   // Lọc ảnh dựa trên giá trị tìm kiếm
-  //   return infoimage.filter((image) =>
-  //     image.title.includes(searchValue)
-  //   );
-  // });
 
   // Lấy danh sách ảnh từ Redux store
   const infoimage = useSelector((state) => state.infoimage);
-  const [infoSearch, setInfoSearch] = useState([]);
+  // const [infoSearch, setInfoSearch] = useState([]);
 
   // Cập nhật giá trị của infoSearch khi có sự thay đổi trong infoimage
-  useEffect(() => {
-    // Lọc ảnh dựa trên giá trị tìm kiếm
-    const filteredImages = infoimage.filter((image) =>
-      image.title.includes(searchValue)
-    );
-    setInfoSearch(filteredImages);
-  }, [infoimage, searchValue]);
+  // useEffect(() => {
+  //   // Lọc ảnh dựa trên giá trị tìm kiếm
+  //   const filteredImages = infoimage.filter((image) =>
+  //     image.title.includes(searchValue)
+  //   );
+  //   setInfoSearch(filteredImages);
+  // }, [infoimage, searchValue]);
 
   return (
     <Container fluid id="header1">

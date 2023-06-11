@@ -25,7 +25,7 @@ const Register = () => {
     } catch (error) {
       toast.error(error.message, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -33,6 +33,10 @@ const Register = () => {
         progress: undefined,
         theme: "light",
       });
+      // Chờ 3 giây trước khi chuyển hướng trang
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
   };
 

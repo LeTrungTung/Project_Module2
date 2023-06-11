@@ -31,21 +31,6 @@ function CRUDImage() {
   };
 
   return (
-    // bootstrap
-    // <Row xs={2} md={4} className="g-4">
-    //   {imageList.map((image) => (
-    //     <Col key={image.id}>
-    //       <Card>
-    //         <Card.Img variant="top" src={image.urlImage} />
-    //         <Card.Body>
-    //           <Card.Title>{image.title}</Card.Title>
-    //           <Card.Text>Author: {image.author}</Card.Text>
-    //           <Card.Text>Description: {image.description}</Card.Text>
-    //         </Card.Body>
-    //       </Card>
-    //     </Col>
-    //   ))}
-    // </Row>
     <Container id="wrap-cards">
       <Box sx={{ width: 1200, height: 450 }}>
         <ImageList variant="masonry" cols={5} gap={10}>

@@ -121,7 +121,6 @@ const CrudDetail = () => {
     });
   };
 
-  // lay data của /infoimage sau tìm kiếm id của object mới click sau đó ... giữ file đấy cập lại các cặp key và value ví dụ { ...objec, formEdit}
   return (
     <Container id="wrap-detail">
       <div id="left-area">

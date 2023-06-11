@@ -36,6 +36,8 @@ export const login = createAsyncThunk(
   async (payload) => {
     try {
       const response = await UserAPI.login(payload);
+      // const dataUsers=JSON.parse(localStorage.getItem("dataUser"))||[]
+
       response &&
         localStorage.setItem("user", JSON.stringify(response.user));
       response &&

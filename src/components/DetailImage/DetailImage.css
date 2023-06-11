@@ -19,9 +19,7 @@
   object-fit: cover;
   object-position: center;
 }
-/* #left-area {
-  flex: 1;
-} */
+
 #document-save {
   display: flex;
   gap: 15px;
@@ -59,7 +57,6 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   justify-content: space-between;
-  /* margin-left: 40px; */
 }
 #avatar-comment {
   width: 50px;

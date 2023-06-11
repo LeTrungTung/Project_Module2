@@ -20,6 +20,10 @@ const Login = () => {
     e.preventDefault();
     const data = await dispatch(login(inputValue)).unwrap();
     //dispath thanh cong thi ve trang chu
+    if (data && data.status === false) {
+      alert("Tài khoản đã bị khóa.");
+      return;
+    }
     data && navigate("/");
   };
   return (

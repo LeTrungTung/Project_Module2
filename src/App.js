@@ -12,6 +12,7 @@ import Login from "./components/Login/Login";
 import Auth from "./pages/auth/Auth";
 import Register from "./components/Register/Register";
 import UploadImage from "./components/uploadImage/UploadImage";
+// import UploadImage from "./components/uploadImage/UploadImage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
