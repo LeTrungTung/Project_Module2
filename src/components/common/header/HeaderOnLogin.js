@@ -21,6 +21,7 @@ const HeaderOnLogin = () => {
   const dispatch = useDispatch();
   // const imageState = useSelector((state) => state.infoImage);
 
+  const [searchValue, setSearchValue] = useState("");
   // Logout
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -47,6 +48,27 @@ const HeaderOnLogin = () => {
   // useEffect(() => {
   //   dispatch(handleCallImageAPI());
   // }, [dispatch]);
+
+  // const imageList = useSelector((state) => {
+  //   const { infoimage } = state;
+  //   // Lọc ảnh dựa trên giá trị tìm kiếm
+  //   return infoimage.filter((image) =>
+  //     image.title.includes(searchValue)
+  //   );
+  // });
+
+  // Lấy danh sách ảnh từ Redux store
+  const infoimage = useSelector((state) => state.infoimage);
+  const [infoSearch, setInfoSearch] = useState([]);
+
+  // Cập nhật giá trị của infoSearch khi có sự thay đổi trong infoimage
+  useEffect(() => {
+    // Lọc ảnh dựa trên giá trị tìm kiếm
+    const filteredImages = infoimage.filter((image) =>
+      image.title.includes(searchValue)
+    );
+    setInfoSearch(filteredImages);
+  }, [infoimage, searchValue]);
 
   return (
     <Container fluid id="header1">
@@ -77,7 +99,13 @@ const HeaderOnLogin = () => {
           xs="1"
         >
           <BiSearchAlt2 id="icon-search" />
-          <input type="search" placeholder="Search" id="ip-search" />
+          <input
+            type="search"
+            placeholder="Search"
+            id="ip-search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
         </Col>
         <Col lg="2" md="4" xs="6" id="right-header1">
           <BsBellFill className="cl-hover" id="bell" />

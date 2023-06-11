@@ -49,9 +49,7 @@ function ModalForm(props) {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
 
-    // Tạm khoá !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if (!file) return;
-
     const storages = storage;
     const imgRefs = ref(storages, `images/${file.name}`);
     uploadBytes(imgRefs, file).then((snapshot) => {

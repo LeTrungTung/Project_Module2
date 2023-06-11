@@ -57,10 +57,20 @@ export const handleDeleteImageAPI = createAsyncThunk(
 // export const { actions, reducer } = InfoImageSlice;
 // export default reducer;
 
+// const initialState = {
+//   infoimage: [],
+//   // infoSearch: [],
+// };
 const InfoImageSlice = createSlice({
   name: "infoimage",
   initialState: [],
   reducers: {},
+  // {
+  //   updateInfoSearch: (state, action) => {
+  //     state.infoSearch = action.payload;
+  //   },
+  // },
+
   extraReducers: (builder) => {
     builder.addCase(handleCallImageAPI.fulfilled, (state, action) => {
       return action.payload;
@@ -73,6 +83,24 @@ const InfoImageSlice = createSlice({
       return (state = action.payload);
     });
   },
+
+  // extraReducers: (builder) => {
+  //   builder.addCase(handleCallImageAPI.fulfilled, (state, action) => {
+  //     return { ...state, infoimage: action.payload };
+  //   });
+  //   builder.addCase(handleAddImageAPI.fulfilled, (state, action) => {
+  //     return { ...state, infoimage: action.payload };
+  //   });
+  //   builder.addCase(handleEditImageAPI.fulfilled, (state, action) => {
+  //     return { ...state, infoimage: action.payload };
+  //   });
+  //   builder.addCase(
+  //     handleDeleteImageAPI.fulfilled,
+  //     (state, action) => {
+  //       return { ...state, infoimage: action.payload };
+  //     }
+  //   );
+  // },
 });
 
 export const { actions, reducer } = InfoImageSlice;
